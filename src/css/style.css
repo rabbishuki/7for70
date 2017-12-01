@@ -1,0 +1,47 @@
+.longLive {
+    font-weight: 700;
+    line-height: 40px;
+    text-align: center;
+    font-size: 18px;
+    color: white;
+}
+
+.longLive img.pull-right {
+    margin-top: 7px;
+}
+
+sh-navbar header .navbar {
+    top: 45px;
+    border-bottom: 5px solid #062277;
+}
+
+header .navbar-nav>li .donate {
+    margin: 5px;
+    padding: 14px;
+    background: #062277;
+}
+
+header .navbar-nav>li .donate:hover {
+    background: #5c9d17;
+    cursor: pointer;
+}
+
+header .navbar-nav>li .donate a {
+    color: #f49009;
+}
+
+header .navbar-nav>li .donate:hover a {
+    color: #062277;
+    text-decoration: none;
+}
+
+.partners-img {
+    width: 100%;
+    height: auto;
+}
+
+@media (max-width: 768px) {
+    .navbar-brand>img {
+        transform: scale(0.5) translate(-85px, -85px);
+    }
+}
