@@ -1,0 +1,29 @@
+<div class="widget">
+    <form name="sentMessage" id="contactForm" class="col-md-12" novalidate>
+        <h5 class="widgetheading" translate="form-title"></h5>
+        <div class="control-group col-md-6">
+            <div class="controls">
+                <input type="text" class="form-control" name="name" ng-model="$ctrl.form.name"
+                       placeholder="{{ 'form-name' | translate }}" required />
+            </div>
+        </div>
+        <div class="control-group col-md-6">
+            <div class="controls">
+                <input type="email" class="form-control" name="email" ng-model="$ctrl.form.email"
+                        placeholder="{{ 'form-email' | translate }}" required />
+            </div>
+        </div>
+
+        <div class="control-group col-md-12">
+            <div class="controls">
+                <textarea rows="3" cols="100" class="form-control" name="message" ng-model="$ctrl.form.message"
+                          placeholder="{{ 'form-message' | translate }}" required
+                          minlength="5" maxlength="999" style="resize:none"></textarea>
+            </div>
+        </div>
+        
+        <button type="submit" ng-click="$ctrl.send($ctrl.form)" class="btn btn-primary pull-right">
+            <span translate="form-button"></span>
+        </button>
+    </form>
+</div>
