@@ -1,0 +1,13 @@
+<section id="banner" ng-if="$ctrl.length">
+    <div id="main-slider" class="flexslider">
+        <ul class="slides">
+            <li ng-repeat="x in $ctrl.length track by $index">
+                <img ng-src="{{ 'image-url-' + ($index + 1) | translate }}" alt="" />
+                <div class="flex-caption">
+                    <h3 translate="image-header-{{ $index + 1 }}"></h3>
+                    <p translate="image-sub-{{ $index + 1 }}"></p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</section>
