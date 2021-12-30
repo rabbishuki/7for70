@@ -4,7 +4,7 @@ angular.module('app').service("googleSheetsService", function ($http) {
 
     service.setUrl = function (path) {
         if (path) {
-            url = "https://spreadsheets.google.com/feeds/list/" + path + "/od6/public/values?alt=json";
+            url = "https://sheets.googleapis.com/v4/spreadsheets/" + path + "/values/Sheet1?alt=json&key=AIzaSyDVh0t10vWXoctuhUO00oixlwGXATPNZEM";
         }
     };
     
