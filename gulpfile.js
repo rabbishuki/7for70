@@ -10,8 +10,9 @@ var gulp = require('gulp'),
     connect = require('gulp-connect'),
     gutil = require('gulp-util'),
     ftp = require('vinyl-ftp'),
-    readline = require('readline')
-    login = require('./ftpLogin')
+    readline = require('readline'),
+    rename = require("gulp-rename")
+    // login = require('./ftpLogin')
 
     files = {
         libjs: [
@@ -33,6 +34,15 @@ var gulp = require('gulp'),
         ],
         appcss: [
             'src/**/*.css',
+        ],
+        config: [
+            './src/contact.php',
+            './src/CNAME',
+            './src/.htaccess',
+            './src/config.json',
+            './src/favicon.ico',
+            './src/logo.ico',
+            './index.html'
         ],
         glob: ['dist/**/*.*'],
         remoteFolder: '/ato770/7for70'
@@ -89,9 +99,20 @@ gulp.task('fonts', function() {
         .pipe(gulp.dest('dist/fonts/'))
 });
 
+gulp.task('images', function() {
+    gulp.src(['./src/img/*.png', './src/img/*.jpg'])
+        .pipe(gulp.dest('dist/img/'))
+});
+
 gulp.task('html', function () {
-    gulp.src(['./src/index.html', './src/contact.php', './src/.htaccess', './src/config.json'])
+    gulp.src(files.config)
         .pipe(gulp.dest('dist'))
+});
+
+gulp.task('rename', function () {
+    gulp.src(['./src/index.html'])
+        .pipe(rename("404.html"))
+        .pipe(gulp.dest('./dist'))
 });
 
 gulp.task('webserver', function() {
@@ -117,6 +138,7 @@ gulp.task('ftp-deploy', function () {
     }
 });
 
+var tasks =  ['libjs', 'appjs', 'libcss', 'appcss', 'templates', 'fonts', 'images', 'html', 'rename'];
 // Styles task
 // gulp.task('styles', function () {
 //     gulp.src(files.appcss)
@@ -126,6 +148,8 @@ gulp.task('ftp-deploy', function () {
 //         .pipe(sourcemaps.write('./'))
 //         .pipe(gulp.dest('dist/'));
 // });
+
+gulp.task('build', tasks);
 
 gulp.task('watch', ['libjs', 'appjs', 'libcss', 'appcss', 'fonts', 'html', 'templates'], function () {
     gulp.watch('src/**/*.js', ['appjs']);
