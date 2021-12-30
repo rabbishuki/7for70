@@ -42,7 +42,7 @@ var gulp = require('gulp'),
             './src/config.json',
             './src/favicon.ico',
             './src/logo.ico',
-            './index.html'
+            './src/index.html'
         ],
         glob: ['dist/**/*.*'],
         remoteFolder: '/ato770/7for70'

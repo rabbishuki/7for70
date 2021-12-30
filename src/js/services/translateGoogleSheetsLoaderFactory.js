@@ -13,20 +13,30 @@ angular.module('app').factory("translateGoogleSheetsLoader", function ($http, $q
     setUrl("1e29CirEQoQ4nfEHAkKfePMqK4s36TVCS-gPH4psidtw");
 
     function parse(entries, lang) {
-        if (entries[0]['gsx$' + lang]) {
-            var translations = {};
-            
-            for (var entry in entries) {
-                var key = entries[entry].gsx$key.$t;
-                var value = entries[entry]['gsx$' + lang].$t;
-            
-                if(key && value) (translations[key] = value);
-            }
-
-            return translations;
-        } else {
-            console.error('Language not available in Google Sheets.');
+        if (!entries || !lang) {
+            console.error('Problem loading translations');
         }
+
+        var langIndex = entries[0].findIndex(function (i) {
+            return i === lang;
+        });
+        if (!langIndex) {
+            console.error('Problem identifying language', lang);
+        }
+
+        var translations = {};
+        for (var lineIndex in entries) {
+            if (entries[lineIndex]) {
+                var row = entries[lineIndex][0];
+                var value = entries[lineIndex][langIndex];
+
+                if (row && value) {
+                    translations[row] = value;
+                }
+            }
+        }
+
+        return translations;
     }
 
     return function (options) {
@@ -35,10 +45,9 @@ angular.module('app').factory("translateGoogleSheetsLoader", function ($http, $q
         $http.get(url).then(function (response) {
             if (response &&
                 response.data &&
-                response.data.feed &&
-                response.data.feed.entry.length) {
+                response.data.values) {
                 
-                deferred.resolve(parse(response.data.feed.entry, options.key));
+                deferred.resolve(parse(response.data.values, options.key));
             }
         });
 
