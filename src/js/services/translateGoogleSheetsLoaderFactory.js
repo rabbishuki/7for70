@@ -4,9 +4,9 @@ angular.module('app').factory("translateGoogleSheetsLoader", function ($http, $q
     function setUrl(path) {
         if (path) {
             url =
-                "https://spreadsheets.google.com/feeds/list/" +
+                "https://sheets.googleapis.com/v4/spreadsheets/" +
                 path +
-                "/od6/public/values?alt=json";
+                "/values/Sheet1?alt=json&key=AIzaSyDVh0t10vWXoctuhUO00oixlwGXATPNZEM";
         }
     }
 
